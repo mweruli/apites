@@ -1,0 +1,32 @@
+fastapi
+uvicorn
+requests
+SQLAlchemy
+python-dotenv
+pymssql
+mssql
+pyodbc
+mysql
+mysql-connector
+aiomysql
+psycopg
+rocketry
+# alembic
+# pydantic[email]
+# passlib[bcrypt]
+# fastapi-mail
+# python-jose[cryptography]
+# python-multipart
+PyMySQL
+# pip install -r requirements.txt
+# py -m venv env
+# source ./Scripts/activate
+
+CREATE TABLE invoices (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    invoice_number VARCHAR(200),
+    cu_serial_number VARCHAR(200),
+    cu_invoice_number VARCHAR(200),
+    amount VARCHAR(200),
+    invoice_date VARCHAR(200)
+);
