@@ -113,19 +113,19 @@ async def upload_xml(file: bytes = File(...)):
         result = engine_msssql.execute(insert_stmt, (invoice_number, cu_serial_number,cu_invoice_number, amount, date_time))
         print(result)
         
-        # with open("invoice_data.csv", "w", newline="") as csvfile:
-        #     writer = csv.writer(csvfile)
-        #     writer.writerow(["Invoice Number", "CU Serial Number", "CU Invoice Number", "Amount", "Date-time"])
-        #     for invoice in data["BatchResult"]["Invoice"]:
-        #         invoice_number = invoice["@Number"]
-        #         match = re.search(r"CU Serial Number:(\S+) CU Invoice Number:(\S+) (\S+)", invoice["AuthorisedHash"])
-        #         cu_invoice_match = re.search(r"CU Invoice Number:(\S+)", authorised_hash)
-        #         cu_serial_number = match.group(1)
-        #         cu_invoice_number = invoice['AuthorisedHash'].split("CU Invoice Number:")[1].split(" ")[0]
-        #         amount = match.group(3)
-        #         date_time = re.search(r"(\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2})", invoice["AuthorisedHash"]).group(1)
-        #         writer.writerow([invoice_number, cu_serial_number, str(cu_invoice_number), amount, date_time])
-        #         print("Invoice Number:", cu_invoice_number)
+        with open("invoice_data.csv", "w", newline="") as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(["Invoice Number", "CU Serial Number", "CU Invoice Number", "Amount", "Date-time"])
+            for invoice in data["BatchResult"]["Invoice"]:
+                invoice_number = invoice["@Number"]
+                match = re.search(r"CU Serial Number:(\S+) CU Invoice Number:(\S+) (\S+)", invoice["AuthorisedHash"])
+                cu_invoice_match = re.search(r"CU Invoice Number:(\S+)", authorised_hash)
+                cu_serial_number = match.group(1)
+                cu_invoice_number = invoice['AuthorisedHash'].split("CU Invoice Number:")[1].split(" ")[0]
+                amount = match.group(3)
+                date_time = re.search(r"(\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2})", invoice["AuthorisedHash"]).group(1)
+                writer.writerow([invoice_number, cu_serial_number, str(cu_invoice_number), amount, date_time])
+                print("Invoice Number:", cu_invoice_number)
 
 
 
