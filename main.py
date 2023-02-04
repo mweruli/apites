@@ -128,11 +128,6 @@ async def upload_xml(file: bytes = File(...)):
                 print("Invoice Number:", cu_invoice_number)
 
 
-
-
-
-
-
         # return value_after_cu_invoice_number
         sql = "INSERT INTO invoices (invoice_number,cu_serial_number, cu_invoice_number,amount, invoice_date) VALUES (%s, %s, %s,%s,%s)"
         await cursor.execute(sql, (invoice_number, cu_serial_number,cu_invoice_number,amount, date_time))
@@ -189,4 +184,12 @@ async def calculate_paye(income: float = Query(..., description="The user's inco
         
     paye = paye - insurance_relief
     return {"income": income, "nssf": nssf, "nhif": nhif,"NHIF relief": insurance_relief, "tax charged": taxable_income,"relief": relief, "PAYE": paye}
+
+async def get_user_sql():
+    result = engine_msssql.execute("SELECT id, emp_code,punch_time,terminal_sn,area_alias,upload_time, sync_status FROM iclock_transaction where sync_status IS NULL")
+    data = []
+    for row in result:
+        data.append({"id": row[0], "emp_code": row[1],"punch_time": row[2], "terminal_sn": row[3], "area_alias": row[4], "upload_time": row[5], "sync_status": row[6]})
+    return data
+
     
