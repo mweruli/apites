@@ -112,6 +112,12 @@ async def upload_xml(file: bytes = File(...)):
         amount = match1.group(1)
         result = engine_msssql.execute(insert_stmt, (invoice_number, cu_serial_number,cu_invoice_number, amount, date_time))
         print(result)
+        date_time = authorised_hash.split("\n")[-1]
+        cu_serial_number = cu_serial_match.group(1)
+        cu_invoice_number = cu_invoice_match.group(1)
+        amount = match1.group(1)
+        result = engine_msssql.execute(insert_stmt, (invoice_number, cu_serial_number,cu_invoice_number, amount, date_time))
+        print(result)
         
         with open("invoice_data.csv", "w", newline="") as csvfile:
             writer = csv.writer(csvfile)
