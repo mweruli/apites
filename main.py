@@ -1,5 +1,5 @@
 from typing import Union
-from fastapi import FastAPI, Request, File, Query, UploadFile
+from fastapi import FastAPI, Request, File, Query, UploadFile, HTTPException
 import requests
 import json
 import xmltodict
@@ -198,12 +198,47 @@ async def get_user_sql():
     return data
 
 
+
 @app.post("/towns")
-async def create_town(file: UploadFile):
-    contents = await file.read()
-    reader = csv.reader(contents.decode().splitlines(), delimiter=',')
-    next(reader)
-    for row in reader:
-        town_1, town_2, value = row
-        town = Town(town_1=town_1, town_2=town_2, value=value)
-        print(town)
+async def get_town_intersection(file: UploadFile, from_town: str, to_town: str):
+    return {"value": get_intersection_value(file, from_town, to_town)}
+
+def get_intersection_value(file, from_town, to_town):
+    with open(file.path) as f:
+        reader = csv.reader(f)
+        header = next(reader)
+        from_index = header.index(from_town)
+        to_index = header.index(to_town)
+        for row in reader:
+            if row[0] == from_town:
+                return int(row[to_index])
+    raise HTTPException(status_code=400, detail="Intersection not found")
+
+
+
+# @app.post("/towns")
+# async def create_town(file: UploadFile):
+#     contents = await file.read()
+#     decoded_content = contents.decode('utf-8')
+#     reader = csv.reader(decoded_content.splitlines(), delimiter=',')
+#     header = next(reader)
+#     town_1 = header.index("nairobi")
+#     town_2 = header.index("naivasha")
+#     data = []
+#     for row in reader:
+#         data.append(int(row[town_1]) + int(row[town_2]))
+#     return data
+    # file_content = await file.read()
+    # file_str = file_content.decode()
+    # reader = csv.reader(file_str.splitlines())
+    # headers = next(reader)
+    # print(headers)
+    # for row in reader:
+    #     return row   
+    # contents = await file.read()
+    # reader = csv.reader(contents.decode().splitlines(), delimiter=',')
+    # next(reader)
+    # for row in reader:
+    #     town_1, town_2, value = row
+    #     town = Town(town_1=town_1, town_2=town_2, value=value)
+    #     print(town)
