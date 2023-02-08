@@ -1,5 +1,5 @@
 from typing import Union
-from fastapi import FastAPI, Request, File, Query
+from fastapi import FastAPI, Request, File, Query, UploadFile
 import requests
 import json
 import xmltodict
@@ -8,12 +8,16 @@ import csv
 import aiomysql
 import pprint
 from utilis import engine_msssql
+from pydantic import BaseModel
 app = FastAPI()
 
 
 
 
-
+class Town(BaseModel):
+    town_1: str
+    town_2: str
+    value: int
 
 @app.post("/sendrequest")
 def send_request():
@@ -112,7 +116,6 @@ async def upload_xml(file: bytes = File(...)):
         amount = match1.group(1)
         result = engine_msssql.execute(insert_stmt, (invoice_number, cu_serial_number,cu_invoice_number, amount, date_time))
         print (result)
-        return result
 
         
         with open("invoice_data.csv", "w", newline="") as csvfile:
@@ -194,4 +197,13 @@ async def get_user_sql():
         data.append({"id": row[0], "emp_code": row[1],"punch_time": row[2], "terminal_sn": row[3], "area_alias": row[4], "upload_time": row[5], "sync_status": row[6]})
     return data
 
-    
+
+@app.post("/towns")
+async def create_town(file: UploadFile):
+    contents = await file.read()
+    reader = csv.reader(contents.decode().splitlines(), delimiter=',')
+    next(reader)
+    for row in reader:
+        town_1, town_2, value = row
+        town = Town(town_1=town_1, town_2=town_2, value=value)
+        print(town)
