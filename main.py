@@ -99,10 +99,10 @@ def payments():
 async def upload_xml(file: bytes = File(...)):
     # connects = engine_msssql.connect()
     
-    connection = await aiomysql.connect(host='localhost',user='root', password='', db='invoices')
-    cursor = await connection.cursor()
+    # connection = await aiomysql.connect(host='localhost',user='root', password='', db='invoices')
+    # cursor = await connection.cursor()
     data = xmltodict.parse(file)
-    insert_stmt = '''INSERT INTO invoices (invoice_number, cu_serial_number, cu_invoice_number,amount,invoice_date) VALUES (?,?,?,?,?)'''
+    # insert_stmt = '''INSERT INTO invoices (invoice_number, cu_serial_number, cu_invoice_number,amount,invoice_date) VALUES (?,?,?,?,?)'''
     for invoice in data ['BatchResult']['Invoice']:
         invoice_number = invoice["@Number"]
         authorised_hash = invoice["AuthorisedHash"]
@@ -114,10 +114,8 @@ async def upload_xml(file: bytes = File(...)):
         cu_serial_number = cu_serial_match.group(1)
         cu_invoice_number = cu_invoice_match.group(1)
         amount = match1.group(1)
-        result = engine_msssql.execute(insert_stmt, (invoice_number, cu_serial_number,cu_invoice_number, amount, date_time))
-        print (result)
-
-        
+        # result = engine_msssql.execute(insert_stmt, (invoice_number, cu_serial_number,cu_invoice_number, amount, date_time))
+        # print (result)        
         with open("invoice_data.csv", "w", newline="") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(["Invoice Number", "CU Serial Number", "CU Invoice Number", "Amount", "Date-time"])
@@ -133,15 +131,15 @@ async def upload_xml(file: bytes = File(...)):
                 print("Invoice Number:", cu_invoice_number)
 
 
-        # return value_after_cu_invoice_number
-        sql = "INSERT INTO invoices (invoice_number,cu_serial_number, cu_invoice_number,amount, invoice_date) VALUES (%s, %s, %s,%s,%s)"
-        await cursor.execute(sql, (invoice_number, cu_serial_number,cu_invoice_number,amount, date_time))
-        await connection.commit()
-        print("Invoice Number:", invoice_number)
-        print("CU Serial Number:", cu_serial_number)
-        print("CU Invoice Number:", cu_invoice_number)
-        print("Datetime:", date_time)
-        print("amount:", amount)
+        # # return value_after_cu_invoice_number
+        # sql = "INSERT INTO invoices (invoice_number,cu_serial_number, cu_invoice_number,amount, invoice_date) VALUES (%s, %s, %s,%s,%s)"
+        # await cursor.execute(sql, (invoice_number, cu_serial_number,cu_invoice_number,amount, date_time))
+        # await connection.commit()
+        # print("Invoice Number:", invoice_number)
+        # print("CU Serial Number:", cu_serial_number)
+        # print("CU Invoice Number:", cu_invoice_number)
+        # print("Datetime:", date_time)
+        # print("amount:", amount)
         
 @app.get("/paye")
 async def calculate_paye(income: float = Query(..., description="The user's income")):
