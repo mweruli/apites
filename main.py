@@ -99,7 +99,7 @@ def payments():
 async def upload_xml(file: bytes = File(...)):
     # connects = engine_msssql.connect()
     
-    # connection = await aiomysql.connect(host='localhost',user='root', password='', db='invoices')
+    connection = await aiomysql.connect(host='localhost',user='root', password='', db='invoices')
     # cursor = await connection.cursor()
     data = xmltodict.parse(file)
     # insert_stmt = '''INSERT INTO invoices (invoice_number, cu_serial_number, cu_invoice_number,amount,invoice_date) VALUES (?,?,?,?,?)'''
