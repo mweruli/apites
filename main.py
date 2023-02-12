@@ -87,7 +87,7 @@ def reconciliate():
     response = requests.request("POST", url, headers=headers, data=data)
     data  = json.loads(response.text)
     return data["orders"]
-    # return data
+    return data
     
 @app.post("/make-payments")
 def payments():
