@@ -214,18 +214,18 @@ def get_intersection_value(file, from_town, to_town):
 
 
 
-# @app.post("/towns")
-# async def create_town(file: UploadFile):
-#     contents = await file.read()
-#     decoded_content = contents.decode('utf-8')
-#     reader = csv.reader(decoded_content.splitlines(), delimiter=',')
-#     header = next(reader)
-#     town_1 = header.index("nairobi")
-#     town_2 = header.index("naivasha")
-#     data = []
-#     for row in reader:
-#         data.append(int(row[town_1]) + int(row[town_2]))
-#     return data
+@app.post("/towns")
+async def create_town(file: UploadFile):
+    contents = await file.read()
+    decoded_content = contents.decode('utf-8')
+    reader = csv.reader(decoded_content.splitlines(), delimiter=',')
+    header = next(reader)
+    town_1 = header.index("nairobi")
+    town_2 = header.index("naivasha")
+    data = []
+    for row in reader:
+        data.append(int(row[town_1]) + int(row[town_2]))
+    return data
     # file_content = await file.read()
     # file_str = file_content.decode()
     # reader = csv.reader(file_str.splitlines())
