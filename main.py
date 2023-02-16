@@ -226,11 +226,11 @@ async def create_town(file: UploadFile):
     for row in reader:
         data.append(int(row[town_1]) + int(row[town_2]))
     return data
-    # file_content = await file.read()
-    # file_str = file_content.decode()
-    # reader = csv.reader(file_str.splitlines())
-    # headers = next(reader)
-    # print(headers)
+    file_content = await file.read()
+    file_str = file_content.decode()
+    reader = csv.reader(file_str.splitlines())
+    headers = next(reader)
+    print(headers)
     # for row in reader:
     #     return row   
     # contents = await file.read()
