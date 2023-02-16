@@ -233,8 +233,8 @@ async def create_town(file: UploadFile):
     print(headers)
     for row in reader:
         return row   
-    # contents = await file.read()
-    # reader = csv.reader(contents.decode().splitlines(), delimiter=',')
+    contents = await file.read()
+    reader = csv.reader(contents.decode().splitlines(), delimiter=',')
     # next(reader)
     # for row in reader:
     #     town_1, town_2, value = row
