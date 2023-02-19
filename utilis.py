@@ -20,18 +20,18 @@ SQLALCHEMY_DATABASE_URL = DATABASE_URL
 DATABASE_URL_MYSQL = f"mysql+pymysql://root:@localhost:3306/hrmis"
 engine_mysql = create_engine(DATABASE_URL_MYSQL)
 engine_msssql = create_engine(DATABASE_URL)
-# SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:oracle1234@localhost:3306/hrmis"
+SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:oracle1234@localhost:3306/hrmis"
 
-# engine = create_engine(
-#     SQLALCHEMY_DATABASE_URL
-# ) 
-# SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL
+) 
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# Base = declarative_base()
+Base = declarative_base()
 
-# def get_db():
-#     db = SessionLocal()
-#     try:
-#         yield db
-#     finally:
-#         db.close()
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
