@@ -10,7 +10,7 @@ import pymssql
 server = 'DESKTOP-UIGNTDP\SQLEXPRESS,9124'
 database = 'invoices'
 username = 'sa'
-password = 'oracle1234'
+password = 'oracle1237494'
 
 # Connect to the database
 DATABASE_URL = f"mssql+pyodbc://{username}:{password}@{server}/{database}?driver=ODBC+Driver+11+for+SQL+Server"
