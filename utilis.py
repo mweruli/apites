@@ -15,7 +15,7 @@ password = 'oracle1237494'
 # Connect to the database
 DATABASE_URL = f"mssql+pyodbc://{username}:{password}@{server}/{database}?driver=ODBC+Driver+11+for+SQL+Server"
 
-SQLALCHEMY_DATABASE_URL = DATABASE_URL
+# QLALCHEMY_DATABASE_URL = DATABASE_URL
 
 DATABASE_URL_MYSQL = f"mysql+pymysql://root:@localhost:3306/hrmis"
 engine_mysql = create_engine(DATABASE_URL_MYSQL)
