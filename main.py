@@ -212,7 +212,17 @@ def get_intersection_value(file, from_town, to_town):
                 return int(row[to_index])
     raise HTTPException(status_code=400, detail="Intersection not found")
 
+@router_logs.get("/task/{task_name}/logs", description="Get tasks")
+async def get_task_logs(task_name:str,
+                        action: Optional[List[Literal['run', 'success', 'fail', 'terminate', 'crash', 'inaction']]] = Query(default=[]),
+                        min_created: Optional[int]=Query(default=None), max_created: Optional[int] = Query(default=None)):
+    filter = {}
+    if action:
+        filter['action'] = in_(action)
+    if min_created or max_created:
+        filter['created'] = between(min_created, max_created, none_as_open=True)
 
+    return session[task_name].logger.filter_by(**filter).all()
 
 @app.post("/towns")
 async def create_town(file: UploadFile):
