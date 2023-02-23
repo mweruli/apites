@@ -233,16 +233,16 @@ async def create_town(file: UploadFile):
     town_1 = header.index("nairobi")
     town_2 = header.index("naivasha")
     data = []
-    for row in reader:
-        data.append(int(row[town_1]) + int(row[town_2]))
-    return data
-    file_content = await file.read()
-    file_str = file_content.decode()
-    reader = csv.reader(file_str.splitlines())
-    headers = next(reader)
-    print(headers)
-    for row in reader:
-        return row   
+    # for row in reader:
+    #     data.append(int(row[town_1]) + int(row[town_2]))
+    # return data
+    # file_content = await file.read()
+    # file_str = file_content.decode()
+    # reader = csv.reader(file_str.splitlines())
+    # headers = next(reader)
+    # print(headers)
+    # for row in reader:
+    #     return row   
     contents = await file.read()
     reader = csv.reader(contents.decode().splitlines(), delimiter=',')
     next(reader)
