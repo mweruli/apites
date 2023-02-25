@@ -241,9 +241,9 @@ async def create_town(file: UploadFile):
     reader = csv.reader(file_str.splitlines())
     headers = next(reader)
     print(headers)
-    for row in reader:
-        return row   
-    contents = await file.read()
+    # for row in reader:
+    #     return row   
+    # contents = await file.read()
     # reader = csv.reader(contents.decode().splitlines(), delimiter=',')
     # next(reader)
     # for row in reader:
