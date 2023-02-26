@@ -35,3 +35,17 @@ def get_db():
         yield db
     finally:
         db.close()
+        
+server = '41.215.30.210,1433'
+database = 'hrms'
+username = 'sa'
+password = 'oracle1234'
+
+# Connect to the database
+DATABASE_URL = f"mssql+pyodbc://{username}:{password}@{server}/{database}?driver=ODBC+Driver+11+for+SQL+Server"
+
+SQLALCHEMY_DATABASE_URL = DATABASE_URL
+
+DATABASE_URL_MYSQL = f"mysql+pymysql://root:@localhost:3306/hrmis"
+engine_mysql = create_engine(DATABASE_URL_MYSQL)
+engine_msssql = create_engine(DATABASE_URL)
