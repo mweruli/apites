@@ -255,3 +255,4 @@ async def create_town(file: UploadFile):
 async def update_mysql():
     connection = await aiomysql.connect(host='41.215.30.210',user='john', password='oracle1234', db='hr5')
     data = await get_user_sql()
+    return data
