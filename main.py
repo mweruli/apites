@@ -250,3 +250,8 @@ async def create_town(file: UploadFile):
         town_1, town_2, value = row
         town = Town(town_1=town_1, town_2=town_2, value=value)
         print(town)
+        
+@app.get("/update-mysql-table")
+async def update_mysql():
+    connection = await aiomysql.connect(host='41.215.30.210',user='john', password='oracle1234', db='hr5')
+    data = await get_user_sql()
