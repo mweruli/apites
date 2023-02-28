@@ -256,3 +256,12 @@ async def update_mysql():
     connection = await aiomysql.connect(host='41.215.30.210',user='john', password='oracle1234', db='hr5')
     data = await get_user_sql()
     return data
+async def get_user_sql():
+    conn = engine_msssql.connect()
+    query = "SELECT id, emp_code,punch_time,terminal_sn,area_alias,upload_time, sync_status FROM iclock_transaction where sync_status IS NULL"
+    # query = "SELECT id, emp_code,punch_time,terminal_sn,area_alias,upload_time, sync_status FROM iclock_transaction"
+    result = conn.execute(text(query))
+    data = []
+    for row in result:
+        data.append({"id": row[0], "emp_code": row[1],"punch_time": row[2], "terminal_sn": row[3], "area_alias": row[4], "upload_time": row[5], "sync_status": row[6]})
+    return data
