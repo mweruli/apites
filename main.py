@@ -279,8 +279,9 @@ async def update_mysql():
 for row in data:
         punch_time_string = (str(row['punch_time']))
         upload_time_string  = (str(row['upload_time']))
-        if "." not in upload_time_string:
-            upload_string = upload_time_string + ".000000"
+        # if "." not in upload_time_string:
+        #     upload_string = upload_time_string + ".000000"
+            
 async def get_user_sql():
     conn = engine_msssql.connect()
     query = "SELECT id, emp_code,punch_time,terminal_sn,area_alias,upload_time, sync_status FROM iclock_transaction where sync_status IS NULL"
