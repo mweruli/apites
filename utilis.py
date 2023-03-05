@@ -49,3 +49,19 @@ SQLALCHEMY_DATABASE_URL = DATABASE_URL
 DATABASE_URL_MYSQL = f"mysql+pymysql://root:@localhost:3306/hrmis"
 engine_mysql = create_engine(DATABASE_URL_MYSQL)
 engine_msssql = create_engine(DATABASE_URL)
+
+"""
+This file contains FastAPI app.
+Modify the routes as you wish.
+"""
+
+import datetime
+import time
+from typing import List, Literal, Optional
+from pydantic import BaseModel, Field, validator
+from redbird.oper import in_, between, greater_equal
+
+from fastapi import APIRouter, FastAPI, Query
+from fastapi.middleware.cors import CORSMiddleware
+
+from scheduler import app as app_rocketry
