@@ -73,3 +73,16 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+class Task(BaseModel):
+    name: str
+    description: Optional[str]
+    priority: int
+
+    start_cond: str
+    end_cond: str
+    timeout: Optional[int]
+
+    disabled: bool
+    force_termination: bool
+    force_run: bool
