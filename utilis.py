@@ -83,6 +83,3 @@ class Task(BaseModel):
     end_cond: str
     timeout: Optional[int]
 
-    disabled: bool
-    force_termination: bool
-    force_run: bool
