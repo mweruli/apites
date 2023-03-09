@@ -79,7 +79,4 @@ class Task(BaseModel):
     description: Optional[str]
     priority: int
 
-    start_cond: str
-    end_cond: str
-    timeout: Optional[int]
 
