@@ -77,6 +77,5 @@ app.add_middleware(
 class Task(BaseModel):
     name: str
     description: Optional[str]
-    priority: int
 
 
