@@ -74,8 +74,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class Task(BaseModel):
-    name: str
-    description: Optional[str]
 
 
