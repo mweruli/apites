@@ -279,7 +279,7 @@ async def update_mysql():
 for row in data:
         punch_time_string = (str(row['punch_time']))
         upload_time_string  = (str(row['upload_time']))
-        # if "." not in upload_time_string:
+        if "." not in upload_time_string:
         #     upload_string = upload_time_string + ".000000"
             
 async def get_user_sql():
