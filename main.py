@@ -268,8 +268,8 @@ async def get_user_sql():
     result = conn.execute(text(query))
     data = []
     for row in result:
-    #     data.append({"id": row[0], "emp_code": row[1],"punch_time": row[2], "terminal_sn": row[3], "area_alias": row[4], "upload_time": row[5], "sync_status": row[6]})
-    # return 
+        data.append({"id": row[0], "emp_code": row[1],"punch_time": row[2], "terminal_sn": row[3], "area_alias": row[4], "upload_time": row[5], "sync_status": row[6]})
+    return 
 
 app.get("/update-mysq")
 async def update_mysql():
