@@ -264,9 +264,7 @@ for row in data:
 async def get_user_sql():
     conn = engine_msssql.connect()
     query = "SELECT id, emp_code,punch_time,terminal_sn,area_alias,upload_time, sync_status FROM iclock_transaction where sync_status IS NULL"
-    query = "SELECT id, emp_code,punch_time,terminal_sn,area_alias,upload_time, sync_status FROM iclock_transaction"
-    result = conn.execute(text(query))
-    data = []
+    
     
 
 app.get("/update-mysq")
